@@ -63,22 +63,38 @@ const images = [
       description: "Lighthouse Coast Sea",
     },
   ];
+
+  const gallery = document.querySelector('.gallery');
+
+const galleryMarkup= images.map(image=>`<li class="gallery-item">
+<a class="gallery-link" href="large-image.jpg">
+  <img
+    class="gallery-image"
+    src="${image.preview}"
+    data-source="${image.original}"
+    alt="${image.description }"
+  />
+</a>
+</li>`).join('');
+gallery.insertAdjacentHTML('beforeend', galleryMarkup);
+
+const link = document.querySelector('.gallery-link');
+
+link.addEventListener('click', (event) => {
+  event.preventDefault();
+  });
+
+  
+
+
+
 //   preview — посилання на маленьку версію зображення для картки галереї
 // original — посилання на велику версію зображення для модального вікна
 // description — текстовий опис зображення, для атрибута alt малого зображення та підпису великого зображення в модалці.
 
 // Використовуй масив об’єктів images і цей HTML шаблон елемента галереї та створи в JavaScript коді розмітку елементів, після чого додай усю розмітку всередину ul.gallery. Не додавай інші HTML теги, крім тих, що містяться в цьому шаблоні.
 
-// <li class="gallery-item">
-//   <a class="gallery-link" href="large-image.jpg">
-//     <img
-//       class="gallery-image"
-//       src="small-image.jpg"
-//       data-source="large-image.jpg"
-//       alt="Image description"
-//     />
-//   </a>
-// </li>
+
 
 // В атрибуті src тега <img> вказуємо посилання на маленьку версію зображення.
 // Для атрибута alt використовуємо опис зображення.
