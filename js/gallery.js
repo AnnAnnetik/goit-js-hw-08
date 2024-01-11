@@ -66,7 +66,8 @@ const images = [
 
   const gallery = document.querySelector('.gallery');
 
-const galleryMarkup= images.map(image=>`<li class="gallery-item">
+const galleryMarkup= images.map(image=>
+  `<li class="gallery-item">
 <a class="gallery-link" href="large-image.jpg">
   <img
     class="gallery-image"
@@ -76,27 +77,43 @@ const galleryMarkup= images.map(image=>`<li class="gallery-item">
   />
 </a>
 </li>`).join('');
+
 gallery.insertAdjacentHTML('beforeend', galleryMarkup);
 
-const link = document.querySelector('.gallery-link');
+gallery.addEventListener ('click', onClickGalleryImg);
 
-link.addEventListener('click', (event) => {
-  event.preventDefault();
-  });
+function onClickGalleryImg(e) {
+  e.preventDefault();
 
+if(e.target.nodeName ==='IMG'){
+  let largeImg = e.target.dataset.source;
+ console.log(largeImg);
+
+ const image = images.find(image =>image.original === largeImg);
+
+
+const instance = basicLightbox.create(`
+   <div class = "modal">
+    <img class = "modal-img"
+      src="${image.original}"
+        alt="${image.description }"/>
+        </div>`,
+ {
+    onShow: (instance) => {
+      document.addEventListener('keydown', closeModal);  
+    },
+    onClose: (instance) => {
+      document.removeEventListener('keydown', closeModal);   
+    }
+});
+
+function closeModal(e) {
+  
+  if (e.code ==='Escape') instance.close();
+}
+
+instance.show()
+}};
   
 
 
-
-//   preview — посилання на маленьку версію зображення для картки галереї
-// original — посилання на велику версію зображення для модального вікна
-// description — текстовий опис зображення, для атрибута alt малого зображення та підпису великого зображення в модалці.
-
-// Використовуй масив об’єктів images і цей HTML шаблон елемента галереї та створи в JavaScript коді розмітку елементів, після чого додай усю розмітку всередину ul.gallery. Не додавай інші HTML теги, крім тих, що містяться в цьому шаблоні.
-
-
-
-// В атрибуті src тега <img> вказуємо посилання на маленьку версію зображення.
-// Для атрибута alt використовуємо опис зображення.
-// Посилання на велике зображення повинно зберігатися в data-атрибуті source на елементі <img>, і вказуватися в href посилання.
-// Зверни увагу на те, що зображення огорнуте посиланням, у якого атрибут href вказує на шлях до файлу з зображенням. Отже клік по ньому може викликати завантаження зображення на комп’ютер користувача. Заборони цю поведінку за замовчуванням.

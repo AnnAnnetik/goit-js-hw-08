@@ -39,13 +39,42 @@ img {
   }
   
   
-  .gallery img {
+  .gallery-image {
     width: 360px;
     height: 200px;
     flex-shrink: 0;
-    background: url(<path-to-image>), lightgray -0.011px -123px / 100.006% 225% no-repeat; 
-  
+   
   }
-  .gallery li {
+
+  .gallery-item {
     width: calc((100% - 48px) / 3);
   }
+   body.show-modal .backdrop {
+  display: flex;
+  opacity: 1;
+  visibility: visible;
+}
+
+.backdrop {
+  left: 0;
+  top: 0;
+  position: absolute;
+  display: none;
+  opacity: 0;
+  visibility: hidden;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.852);
+  width: 100vw;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+}
+
+.modal {
+  min-width: 100px;
+  min-height: 100px;
+  background: rgba(46, 47, 66, 0.80);
+  border-radius: 15px; 
+}
+  
